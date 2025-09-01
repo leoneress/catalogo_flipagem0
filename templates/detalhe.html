@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ imovel['title'] }}</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background-color: #fff; color: #333; }
+
+    /* HEADER */
+    header {
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header img { height: 40px; border-radius: 10px; }
+    header nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+    header nav a:hover { color: #ff385c; }
+
+    /* BANNER HERO */
+    .banner {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+    }
+    .banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(75%);
+    }
+    .banner h1 {
+      position: absolute;
+      bottom: 30px;
+      left: 50px;
+      color: white;
+      font-size: 2.2em;
+      text-shadow: 0 3px 10px rgba(0,0,0,0.6);
+    }
+
+    /* INFO */
+    .container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+      padding: 40px;
+    }
+    .info p { margin: 8px 0; font-size: 1em; }
+    .info strong { color: #333; }
+    .status { font-weight: bold; color: #27ae60; }
+    .status.em-obra { color: #e67e22; }
+    .status.construido { color: #2980b9; }
+
+    /* CARD DE CONTATO */
+    .contact {
+      border: 1px solid #eee;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      background: #fafafa;
+      height: fit-content;
+    }
+    .btn-whatsapp {
+      display: inline-block;
+      padding: 12px 18px;
+      background: #25d366;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .btn-whatsapp:hover { background: #1ebc59; }
+
+    /* GALERIA FINAL */
+    .gallery {
+      padding: 20px 40px 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid #eee;
+      background: #fafafa;
+      padding: 20px 40px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+  <a href="{{ url_for('index') }}" id="logo">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+  </a>
+  <nav>
+    <a href="#">Catálogo</a>
+    <a href="#">Sobre Nós</a>
+    <a href="#">Contato</a>
+  </nav>
+</header>
+
+  <!-- BANNER PRINCIPAL -->
+  <div class="banner">
+    {% if imovel['photos'] %}
+      <img src="{{ imovel['photos'][0] }}" alt="Foto principal de {{ imovel['title'] }}">
+    {% else %}
+      <img src="https://via.placeholder.com/1200x400.png?text=Sem+Foto" alt="Sem foto">
+    {% endif %}
+    <h1>{{ imovel['title'] }}</h1>
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div class="container">
+    <!-- INFO ESQUERDA -->
+    <div class="info">
+      <p><strong>Preço:</strong> R$ {{ imovel['price'] }}</p>
+      <p>
+        <strong>Status:</strong> 
+        <span class="status {% if imovel['status'] == 'EM OBRA' %}em-obra{% elif imovel['status'] == 'CONSTRUIDO' %}construido{% else %}disponivel{% endif %}">
+          {{ imovel['status'] }}
+        </span>
+      </p>
+      <p><strong>Tipo:</strong> {{ imovel['type'] }}</p>
+      <p><strong>Área:</strong> {{ imovel['area'] }} m²</p>
+      <p><strong>Endereço:</strong> {{ imovel['address'] }}</p>
+      <p><strong>Descrição:</strong><br>{{ imovel['description'] | safe }}</p>
+    </div>
+
+    <!-- CONTATO DIREITA -->
+    <div class="contact">
+      <h3>Gostou deste imóvel?</h3>
+      <p>Entre em contato agora mesmo com nossa equipe:</p>
+      <a class="btn-whatsapp" target="_blank" href="https://wa.me/5511945060203?text=Olá! Tenho interesse no imóvel {{ imovel['title'] }}">
+        💬 Falar no WhatsApp
+      </a>
+      <p style="margin-top:15px; font-size:0.9em;">Ou ligue: (11) 94506-0203</p>
+    </div>
+  </div>
+
+  <!-- GALERIA  -->
+  {% if imovel['photos'] and imovel['photos']|length > 1 %}
+    <div class="gallery">
+      {% for foto_url in imovel['photos'][1:] %}
+        <img src="{{ foto_url }}" alt="Foto do imóvel">
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- FOOTER -->
+  <footer>
+    <p><strong>Midrah</strong></p>
+    <p>Rua Chucri Zaidan, 1550 - São Paulo/SP</p>
+    <p>📞 (11) 95085-5314 | ✉️ contato@midrah.com</p>
+    <p>&copy; 2025 Midrah - Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
