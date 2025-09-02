@@ -3,8 +3,8 @@ from flask import Flask, render_template, abort
 from fast_bitrix24 import Bitrix
 
 # --- CONFIGURAÇÃO ---
-
-WEBHOOK_URL = os.environ.get("WEBHOOK_URL") 
+# --- os.environ.get("WEBHOOK_URL")  ---
+WEBHOOK_URL = "https://midrah.bitrix24.com.br/rest/8425/3s2oa1p7rrhwwdr0/"
 if not WEBHOOK_URL:
     raise ValueError("A variável de ambiente WEBHOOK_URL não foi definida.")
 ENTITY_TYPE_ID = 1138  # ID da SPA "Imóveis"
@@ -28,7 +28,8 @@ TIPO_MAP = {
 STATUS_MAP = {
     "2851": "EM OBRA",
     "2853": "CONSTRUIDO",
-    "2855": "Disponível"
+    "2855": "Disponível",
+    "2857": "Indisponivel"
 }
 
 try:
