@@ -4,6 +4,7 @@ from fast_bitrix24 import Bitrix
 
 # --- CONFIGURAÇÃO ---
 # --- os.environ.get("WEBHOOK_URL")  ---
+# --- "https://midrah.bitrix24.com.br/rest/8425/3s2oa1p7rrhwwdr0/" ---
 WEBHOOK_URL = "https://midrah.bitrix24.com.br/rest/8425/3s2oa1p7rrhwwdr0/"
 if not WEBHOOK_URL:
     raise ValueError("A variável de ambiente WEBHOOK_URL não foi definida.")
@@ -14,9 +15,10 @@ FIELD_ID_PRECO = 'ufCrm41_1756408197'
 FIELD_ID_TIPO = 'ufCrm41_1756408282'
 FIELD_ID_STATUS = 'ufCrm41_1756408436'
 FIELD_ID_AREA = 'ufCrm41_1756408321'
-FIELD_ID_ENDERECO = 'ufCrm41_1756408382'
+FIELD_ID_ENDERECO = 'ufCrm41_1757953015594'
 FIELD_ID_FOTOS = 'ufCrm41_1756408463'
 FIELD_ID_DESCRICAO = 'ufCrm41_1756408548'
+FIELD_ID_BOOK = 'ufCrm41_1757700726417'
 
 # --- MAPAS FIXOS ---
 TIPO_MAP = {
