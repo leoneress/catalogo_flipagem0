@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
@@ -7,11 +8,9 @@
     body { 
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       margin: 0; 
-      background-color: #f7f7f7; 
+      background-color: #fff;
       color: #333; 
     }
-
-    /* ---- HEADER ---- */
     header {
       background: #fff;
       border-bottom: 1px solid #eee;
@@ -21,44 +20,18 @@
       padding: 15px 40px;
       position: sticky;
       top: 0;
-      z-index: 1000; /* Garante que o header fique acima de tudo */
+      z-index: 1000;
     }
     header img { height: 40px; }
-    header nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-    }
+    header nav a { margin: 0 15px; text-decoration: none; color: #333; font-weight: 500; }
     header nav a:hover { color: #ff385c; }
 
-    /* ---- MAIN CONTAINER & LAYOUT ---- */
     .page-container {
-      max-width: 1200px;
+      max-width: 1120px;
       margin: 30px auto;
       padding: 0 40px;
     }
 
-    .main-layout {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 40px;
-      margin-top: 20px;
-    }
-
-    .details-column {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-    }
-
-    .sidebar-column {
-      position: sticky;
-      top: 100px; /* Alinhar com o header */
-      height: fit-content;
-    }
-
-    /* ---- GALLERY ---- */
     .image-gallery {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr;
@@ -67,133 +40,85 @@
       border-radius: 16px;
       overflow: hidden;
       max-height: 410px;
+      margin-top: 20px;
     }
-    .gallery-item {
-      overflow: hidden;
-      position: relative;
-    }
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-    .gallery-item:hover img {
-      transform: scale(1.05);
-    }
-    .gallery-item:first-child {
-      grid-row: 1 / -1; /* Ocupa as duas linhas */
-    }
+    .gallery-item { overflow: hidden; position: relative; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-item:first-child { grid-row: 1 / -1; }
     
-    /* ---- PROPERTY HEADER ---- */
-    .property-header h1 {
-      font-size: 2em;
-      margin: 0;
-      font-weight: 700;
+    .property-header h1 { font-size: 2em; margin: 0; font-weight: 700; }
+    .property-header .address { font-size: 1.1em; color: #555; margin-top: 5px; }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      gap: 50px;
+      margin-top: 40px;
     }
-    .property-header p {
-      font-size: 1.1em;
-      color: #555;
-      margin-top: 5px;
+    .left-column { display: flex; flex-direction: column; gap: 30px; }
+    
+    /* CORREÇÃO APLICADA AQUI */
+    .right-column { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 30px; 
+      min-width: 0; /* Impede que a coluna se expanda com conteúdo grande */
     }
 
-    /* ---- CARACTERÍSTICAS ---- */
-    .characteristics {
-      padding: 20px 0;
-      border-top: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
-      display: flex;
-      gap: 30px;
+    .content-block h2 { font-size: 1.4em; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+
+    .characteristics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 20px;
       align-items: center;
+      padding: 10px 0;
     }
-    .char-item {
-      text-align: left;
-    }
-    .char-item .label {
-      font-size: 0.9em;
-      color: #666;
-    }
-    .char-item .value {
-      font-size: 1.2em;
-      font-weight: 600;
-      color: #333;
-    }
+    .char-item { text-align: left; }
+    .char-item .label { font-size: 0.9em; color: #666; }
+    .char-item .value { font-size: 1.2em; font-weight: 600; color: #333; }
     .status { font-weight: bold; }
     .status.em-obra { color: #e67e22; }
     .status.construido { color: #2980b9; }
     .status.disponivel { color: #27ae60; }
 
-
-    /* ---- DESCRIPTION ---- */
-    .description h2 {
-      font-size: 1.5em;
-      margin-bottom: 10px;
+    .description-block {
+        border-style: solid;
+        border-width: 2px;
+        border-radius: 20px;
+        padding: 25px;
     }
-    .description p {
-      line-height: 1.6;
-      color: #444;
+
+    .description-block p {
+        line-height: 1.7;
+        color: #444;
+        font-size: 1.05em;
+        margin: 0;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
     
-    /* ---- SIDEBAR CARD ---- */
-    .sidebar-card {
+    .contact-card {
       border: 1px solid #ddd;
       border-radius: 12px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-      background: #fff;
+      background: #f9f9f9;
       padding: 25px;
+      margin-top: 20px;
     }
-    .price {
-      font-size: 1.8em;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-    .price .label {
-      font-size: 0.7em;
-      font-weight: 400;
-      color: #666;
-      display: block;
-    }
-    .sidebar-card p {
-      font-size: 0.95em;
-      color: #555;
-      margin-bottom: 20px;
-    }
-    .btn-whatsapp {
-      display: block; /* Ocupa toda a largura */
-      text-align: center;
-      padding: 14px;
-      background: #25d366;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.1em;
-      transition: background 0.2s;
-    }
+    .contact-card .price { font-size: 1.8em; font-weight: 700; margin-bottom: 20px; }
+    .contact-card .price .label { font-size: 0.7em; font-weight: 400; color: #666; display: block; }
+    .contact-card p { font-size: 0.95em; color: #555; margin-bottom: 20px; }
+    .btn-whatsapp { display: block; text-align: center; padding: 14px; background: #25d366; color: white; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1em; transition: background 0.2s; }
     .btn-whatsapp:hover { background: #1ebc59; }
-    .sidebar-card .phone-contact {
-        margin-top: 15px;
-        font-size: 0.9em;
-        text-align: center;
-    }
+    .contact-card .phone-contact { margin-top: 15px; font-size: 0.9em; text-align: center; }
 
-    /* ---- FOOTER ---- */
-    footer {
-      border-top: 1px solid #eee;
-      background: #fafafa;
-      padding: 20px 40px;
-      text-align: center;
-      font-size: 0.9em;
-      color: #666;
-      margin-top: 50px;
-    }
+    footer { border-top: 1px solid #eee; background: #fafafa; padding: 20px 40px; text-align: center; font-size: 0.9em; color: #666; margin-top: 50px; }
   </style>
 </head>
 <body>
   <header>
-    <a href="{{ url_for('index') }}" id="logo">
-      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
-    </a>
+    <a href="{{ url_for('index') }}" id="logo"><img src="{{ url_for('static', filename='logo.png') }}" alt="Logo"></a>
     <nav>
       <a href="{{ url_for('index') }}">Catálogo</a>
       <a href="#">Sobre Nós</a>
@@ -204,55 +129,58 @@
   <main class="page-container">
     <div class="property-header">
       <h1>{{ imovel['title'] }}</h1>
+      <p class="address">{{ imovel['address'] }}, {{ imovel['bairro'] }}</p>
     </div>
 
     {% if imovel['photos'] %}
       <div class="image-gallery">
-        {% for photo_url in imovel['photos'][:5] %} {# Limita a 5 fotos para o grid #}
-        <div class="gallery-item">
-          <img src="{{ photo_url }}" alt="Foto do imóvel">
-        </div>
+        {% for photo_url in imovel['photos'][:5] %}
+        <div class="gallery-item"><img src="{{ photo_url }}" alt="Foto do imóvel"></div>
         {% endfor %}
       </div>
     {% endif %}
 
     <div class="main-layout">
-      <div class="details-column">
-        <div class="characteristics">
-          <div class="char-item">
-            <div class="label">Tipo</div>
-            <div class="value">{{ imovel['type'] }}</div>
-          </div>
-          <div class="char-item">
-            <div class="label">Área</div>
-            <div class="value">{{ imovel['area'] }} m²</div>
-          </div>
-          <div class="char-item">
-            <div class="label">Status</div>
-            <div class="value status {% if imovel['status'] == 'EM OBRA' %}em-obra{% elif imovel['status'] == 'CONSTRUIDO' %}construido{% else %}disponivel{% endif %}">
-              {{ imovel['status'] }}
+      <div class="left-column">
+        <div class="content-block">
+            <h2>Características</h2>
+            <div class="characteristics-grid">
+              <div class="char-item">
+                <div class="label">Tipo</div>
+                <div class="value">{{ imovel['type'] }}</div>
+              </div>
+              <div class="char-item">
+                <div class="label">Área</div>
+                <div class="value">{{ imovel['area'] }} m²</div>
+              </div>
+              <div class="char-item">
+                <div class="label">Fase</div>
+                <div class="value">{{ imovel['fase'] }}</div>
+              </div>
+              <div class="char-item">
+                <div class="label">Status</div>
+                <div class="value status {% if imovel['status'] == 'EM OBRA' %}em-obra{% elif imovel['status'] == 'CONSTRUIDO' %}construido{% else %}disponivel{% endif %}">
+                  {{ imovel['status'] }}
+                </div>
+              </div>
             </div>
-          </div>
         </div>
-
-        <div class="description">
-          <p>{{ imovel['address'] }}</p>
-          <h2>Descrição</h2>
-          <p>{{ imovel['description'] | safe }}</p>
-        </div>
-      </div>
-
-      <div class="sidebar-column">
-        <div class="sidebar-card">
+        <div class="contact-card">
           <div class="price">
             <span class="label">A partir de</span>
             R$ {{ imovel['price'] }}
           </div>
-          <p>Gostou deste imóvel? Entre em contato agora mesmo com nossa equipe!</p>
+          <p>Gostou deste imóvel? Fale com nossa equipe!</p>
           <a class="btn-whatsapp" target="_blank" href="https://wa.me/5511945060203?text=Olá! Tenho interesse no imóvel {{ imovel['title'] }}">
-            💬 Falar no WhatsApp
+            💬 Chamar no WhatsApp
           </a>
           <p class="phone-contact">Ou ligue: (11) 94506-0203</p>
+        </div>
+      </div>
+      <div class="right-column">
+        <div class="content-block description-block">
+          <h2>Descrição</h2>
+          <p id="description">{{ imovel['description'] | safe }}</p>
         </div>
       </div>
     </div>
@@ -266,4 +194,3 @@
   </footer>
 </body>
 </html>
-```
